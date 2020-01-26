@@ -36,6 +36,12 @@ file_to_save = os.path.join("analysis", "election_analysis.txt")
 total_votes = 0
 # Candidate Options
 candidate_options = []
+# Declare the empty dictionary
+candidate_votes = {}
+# Winning Candidate and Winning Count Tracker
+winning_candidate = ""
+winning_count = 0
+winning_percentage = 0
 
 # Open the election results and read the file.
 with open(file_to_load) as election_data:
@@ -48,11 +54,43 @@ with open(file_to_load) as election_data:
         candinate_name = row[2]
         if (candinate_name not in candidate_options):
             candidate_options.append(candinate_name)
+            candidate_votes[candinate_name] = 0
+        candidate_votes[candinate_name] += 1
 
-#Print the total votes
-print(total_votes)
-#Print Candidate Options
-print(candidate_options)
+#Loop throught items in candidate_votes
+#Caculate percent and print out results
+for candidate in candidate_votes:
+    #Retrieve vote count of a candidate.
+    votes = candidate_votes[candidate]
+    #Calculate the percentage of votes.
+    vote_percentage = float(votes) / float(total_votes) * 100
+
+    #Print the candidate name and percentage of votes.
+    print(f"{candidate}: {vote_percentage:.1f}% ({votes:,})\n")
+
+    # Determine winning vote count and candidate
+    # Determine if the votes are greater than the winning count.
+    if (votes > winning_count) and (vote_percentage > winning_percentage):
+        # Keep track the max values
+        winning_count = votes
+        winning_percentage = vote_percentage
+        winning_candidate = candidate
+
+# print out the winning candidate, vote count and percentage to terminal.
+winning_candidate_summary = (
+    f"-------------------------\n"
+    f"Winner: {winning_candidate}\n"
+    f"Winning Vote Count: {winning_count:,}\n"
+    f"Winning Percentage: {winning_percentage:.1f}%\n"
+    f"-------------------------\n")
+print(winning_candidate_summary)
+
+# #Print the total votes
+# print(total_votes)
+# #Print Candidate Options
+# print(candidate_options)
+# #Print the candidate votes
+# print(candidate_votes)
 
 """
 # Using the open() function with the "w" mode we will write data to the file.
