@@ -100,7 +100,7 @@ with open(file_to_save, "w") as txt_file:
         f"-------------------------\n")
     print(winning_candidate_summary)
     #  Save the winner candidate results to our text file.
-    txt_file.write(candidate_results)
+    txt_file.write(winning_candidate_summary)
 
 
 
