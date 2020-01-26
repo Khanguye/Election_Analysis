@@ -32,18 +32,29 @@ import os
 file_to_load = os.path.join("Resources", "election_results.csv")
 # Create a filename variable to a direct or indirect path to the file.
 file_to_save = os.path.join("analysis", "election_analysis.txt")
+# Initialize a total vote counter
+total_votes = 0
+# Candidate Options
+candidate_options = []
 
 # Open the election results and read the file.
 with open(file_to_load) as election_data:
-    # To do: read and analyze the data here. 
     # Read the file object with the reader function.
     file_reader = csv.reader(election_data)
     headers = next(file_reader)
-    print(headers)
     for row in file_reader:
-        print(row[0])
-        break
+        #Add to the total vote count
+        total_votes += 1
+        candinate_name = row[2]
+        if (candinate_name not in candidate_options):
+            candidate_options.append(candinate_name)
 
+#Print the total votes
+print(total_votes)
+#Print Candidate Options
+print(candidate_options)
+
+"""
 # Using the open() function with the "w" mode we will write data to the file.
 with open(file_to_save, "w") as txt_file:
     # Write three counties to the file.
@@ -51,5 +62,6 @@ with open(file_to_save, "w") as txt_file:
      txt_file.write("Arapahoe\n")
      txt_file.write("Denver\n")
      txt_file.write("Jefferson\n")
+"""
 
 
