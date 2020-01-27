@@ -51,11 +51,11 @@ with open(file_to_load) as election_data:
     for row in file_reader:
         #Add to the total vote count
         total_votes += 1
-        candinate_name = row[2]
-        if (candinate_name not in candidate_options):
-            candidate_options.append(candinate_name)
-            candidate_votes[candinate_name] = 0
-        candidate_votes[candinate_name] += 1
+        candidate_name = row[2]
+        if (candidate_name not in candidate_options):
+            candidate_options.append(candidate_name)
+            candidate_votes[candidate_name] = 0
+        candidate_votes[candidate_name] += 1
 # Using the open() function with the "w" mode we will write data to the file.
 with open(file_to_save, "w") as txt_file:
     # Print the final vote count to the terminal.
@@ -79,7 +79,7 @@ with open(file_to_save, "w") as txt_file:
         #Print the candidate name and percentage of votes.
         candidate_results = (f"{candidate}: {vote_percentage:.1f}% ({votes:,})\n")
         # Print each candidate, their voter count, and percentage to the terminal.
-        print(candidate_results)
+        print(candidate_results,end="")
         #  Save the candidate results to our text file.
         txt_file.write(candidate_results)
 
